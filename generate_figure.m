@@ -1,0 +1,1 @@
+[ box_count_figh, correlation_figh ] = figure_generator( 'example' );
