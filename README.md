@@ -1,2 +1,2 @@
-# dendrite_analysis
-Dendrite Image Analysis
+# Dendrite Image Analysis
+An old project (ca. 2017) which dealt with segmenting the boundaries of aluminum dendrites in aluminum-silicon alloys and then analyzing the fractal dimension. We tried to find some correlation between processing parameters and micrograph feature (i.e. microstructure), but were unable to do so. All the features we tried had weak correlations, or correlations which defied expectation. The closest we came was with an S-curve fit of the fractal dimension at various length scales. There appeared to be a lower, boundary dimension, and an upper, image dimension. Where the S-curve crossed halfway between them was almost correlated with dendrite scale, and thus cooling rate. Examples of the output can be found, and a ppt presentation with a brief exploratory analysis. The full data set and documentation will not be published.
