@@ -4,7 +4,7 @@ function figim = createTTFigure(name,lnr,tt,gtt,fdi)
 close all;
 
 % Set up figure, and axes handle.
-figure('name',name);
+figim = figure('name',name);
 ah = axes;
 
 % Set up x-axis.
@@ -14,7 +14,7 @@ xlabel('ln(r)');
 set(gca,'XLimMode',     'manual');
 set(gca,'XLim',         [lox hix]);
 set(gca,'XTick',        lox:0.5:hix);
-set(gca,'XTickLabel',	sprintf('%2.1f|',lox:0.5:hix));
+set(gca,'XTickLabel',	lox:0.5:hix);
 
 % Set up y-axis.
 loy = 1.2;
@@ -23,7 +23,7 @@ ylabel('Takens-Theiler Estimator of Correlation Dimension');
 set(gca,'YLimMode',     'manual');
 set(gca,'YLim',         [loy hiy]);
 set(gca,'YTick',        loy:0.1:hiy);
-set(gca,'YTickLabel',	sprintf('%3.2f|',loy:0.1:hiy));
+set(gca,'YTickLabel',	loy:0.1:hiy);
 
 % Hold the plot so we can draw multiple things on it.
 hold(ah);
@@ -50,10 +50,10 @@ plot([lnr(fdi) lnr(fdi)],        [0 gtt(fdi)],       'k:'   );
 plot([0 lnr(fdi)],               [gtt(fdi) gtt(fdi)],'k:'   );
 
 % Export plot to an image using external code.
-figim = export_fig('-png','-m2',gca);
+%figim = export_fig('-png','-m2',gca);
 
 % Close figure.
-close all;
+%close all;
 
 end
 

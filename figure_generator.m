@@ -95,7 +95,7 @@ if numImages<1; fprintf(1,NOIMAGESMSG,imagedir); return; end;
 
 % Get the number of images.
 numImages = size(imageFileNames,1);
- 
+
 % Get the current date and time, and put it into a useful string format to
 % make a unique output directory.
 %datetime = datestr(now,DATE_FORMAT);
@@ -123,7 +123,7 @@ for i = 1:numImages
     % Segment the image path, name and extension. Throw out the path since
     % it is not needed: we already have it.
     [~,imname,imext] = fileparts(imageFileNames(i).name);
-	
+
     % Load the current image. First put together the image's location as a
     % file string. Then read in the image. Finally format it as a uint8
     % array.
@@ -133,22 +133,22 @@ for i = 1:numImages
         warning(err.identifier,SKIPMSG,i,strcat(imname,imext),err.message);
         continue;
     end
-	
+
 	% If the image isn't logical, convert.
     if ~islogical(im)
         warning(SKIPMSG,i,strcat(imname,imext),LOGICALMSG);
         im = logical(im);
     end
-    
+
     % Tell the user what image we're working on.
     fprintf(1,STARTMSG,i,numImages);
-    
+
     % Get the range of values to compute.
     imdiagonal = log(sqrt(sum(size(im).^2)));
     step = imdiagonal/NUMSTEPS;
     lnprange = 0:step:imdiagonal;
     prange = unique(round(exp(lnprange)));
-    
+
     % Box counting.
     % Compute the box count.
     dd = computeBoxCounting(im,prange);
@@ -159,7 +159,7 @@ for i = 1:numImages
     [~,loc] = ismember(udd,dd);
     dd = udd;
     prange = prange(loc);
-    
+
     % Get accessory values.
     lnr = log(prange(:));
     lndd = log(dd(:));
@@ -171,7 +171,7 @@ for i = 1:numImages
     x1 = exp(midlnr);
     y1 = dlncr./dlnr;
     y1 = smooth(x1,y1,19);
-    
+
     close all;
     % Get the scaling regime image.
     xpos = scalingRegime(x1,y1);
@@ -198,7 +198,7 @@ for i = 1:numImages
     y1label = 'Box-count Ratio';
     y2label = 'Estimate of $\beta$';
     box_count_figh = dualplot(sprange(1:end-1),dd(1:end-1),sx1(1:end-1),y1(1:end-1),loi,hii,beta1,xlabel,y1label,y2label);
-    
+
     lobeta = sloreg;
     hibeta = shireg;
 
@@ -208,13 +208,14 @@ for i = 1:numImages
     try
         export_fig(figname,'-png',box_count_figh);
         export_fig(figname,'-eps',box_count_figh);
+        matlab2tikz(figname,'figurehandle',box_count_figh);
     catch err
         warning(err.identifier,BADFIGMSG,i,strcat(fileNames(i).name,OUT_EXT_IMG),err.message);
-    end    
+    end
 
     % Correlation
     % Compute correlation sum.
-    dd = computeCorrelationIntegral(im,prange);    
+    dd = computeCorrelationIntegral(im,prange);
     % Get accessory values.
     lnr = log(prange(:));
     lndd = log(dd(:));
@@ -255,7 +256,7 @@ for i = 1:numImages
     y1label = 'Correlation Ratio';
     y2label = 'Estimate of $\nu$';
     correlation_figh = dualplot(sprange(1:end-2),dd(1:end-2),sx1(1:end-2),y1(1:end-2),loi,hii,nu1,xlabel,y1label,y2label);
-    
+
     lonu = sloreg;
     hinu = shireg;
 
@@ -266,10 +267,11 @@ for i = 1:numImages
     try
         export_fig(figname,'-png',correlation_figh);
         export_fig(figname,'-eps',correlation_figh);
+        matlab2tikz(figname,'figurehandle',correlation_figh);
     catch err
         warning(err.identifier,BADFIGMSG,i,strcat(fileNames(i).name,OUT_EXT_IMG),err.message);
     end
-    
+
     % Write the main results for the current image.
     fprintf(fMainResults,MAIN_RESULTS_FORMAT_STRING,                        ...
         imname,                                                             ...
