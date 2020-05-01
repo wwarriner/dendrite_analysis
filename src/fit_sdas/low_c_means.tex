@@ -1,0 +1,36 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=3.365in,
+height=3.365in,
+at={(1.336in,0.682in)},
+scale only axis,
+xmin=-1.62287874528034,
+xmax=-0.820818753952375,
+xtick={-1.52287874528034,-0.920818753952375},
+xticklabels={{30},{120}},
+xlabel style={font=\color{white!15!black}},
+xlabel={Solidification Velocity (mm/ms)},
+ymin=1.5,
+ymax=2.2,
+ytick={1.5, 1.6, 1.7, 1.8, 1.9,   2, 2.1, 2.2},
+ylabel style={font=\color{white!15!black}},
+ylabel={log10 Scaling Transition (um)},
+axis background/.style={fill=white},
+axis x line*=bottom,
+axis y line*=left
+]
+\addplot [color=black, line width=1.5pt, forget plot]
+ plot [error bars/.cd, y dir = both, y explicit]
+ table[row sep=crcr, y error plus index=2, y error minus index=3]{%
+-1.52287874528034	2.04884025943754	0.03400211845431	-0.0368921047477233\\
+-0.920818753952375	1.90884572802528	0.047705407246327	-0.0535997692057049\\
+};
+\end{axis}
+\end{tikzpicture}%
