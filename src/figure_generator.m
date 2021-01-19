@@ -204,14 +204,14 @@ for i = 1:numImages
 
     % Write the figures.
     % Save final plot name.
-    figname = strcat(OUT_DIR,FS,imname,'_box_dual');
-    try
-        export_fig(figname,'-png',box_count_figh);
-        export_fig(figname,'-eps',box_count_figh);
-        matlab2tikz(figname,'figurehandle',box_count_figh);
-    catch err
-        warning(err.identifier,BADFIGMSG,i,strcat(fileNames(i).name,OUT_EXT_IMG),err.message);
-    end
+%     figname = strcat(OUT_DIR,FS,imname,'_box_dual');
+%     try
+%         export_fig(figname,'-png',box_count_figh);
+%         export_fig(figname,'-eps',box_count_figh);
+%         matlab2tikz(figname,'figurehandle',box_count_figh);
+%     catch err
+%         warning(err.identifier,BADFIGMSG,i,strcat(fileNames(i).name,OUT_EXT_IMG),err.message);
+%     end
 
     % Correlation
     % Compute correlation sum.
